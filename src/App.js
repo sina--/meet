@@ -1,10 +1,10 @@
-import EventList from "./components/EventList.js";
-import "./App.css";
+import EventList from './components/EventList';
+import './App.css';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <EventList />
+      <EventList events={[{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]} />
     </div>
   );
 }
