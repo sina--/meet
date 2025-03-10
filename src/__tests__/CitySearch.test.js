@@ -47,4 +47,25 @@ describe('<CitySearch /> component', () => {
       expect(suggestionListItems[i].textContent).toBe(suggestions[i]);
     }
   });
+
+  test('calls onCitySelected callback when a city is selected', async () => {
+    const user = userEvent.setup();
+    const allEvents = await getEvents();
+    const allLocations = extractLocations(allEvents);
+    const onCitySelected = jest.fn();
+    CitySearchComponent.rerender(
+      <CitySearch 
+        allLocations={allLocations} 
+        onCitySelected={onCitySelected} 
+      />
+    );
+
+    const cityTextBox = CitySearchComponent.queryByRole('textbox');
+    await user.click(cityTextBox); // focus the input
+    
+    const firstSuggestion = CitySearchComponent.queryAllByRole('listitem')[0];
+    await user.click(firstSuggestion);
+    
+    expect(onCitySelected).toHaveBeenCalledWith(firstSuggestion.textContent);
+  });
 });

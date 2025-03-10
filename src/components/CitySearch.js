@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const CitySearch = ({ allLocations }) => {
+const CitySearch = ({ allLocations, onCitySelected }) => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -15,12 +15,18 @@ const CitySearch = ({ allLocations }) => {
     setSuggestions(filteredLocations);
   };
 
+  const handleItemClicked = (suggestion) => {
+    setQuery(suggestion);
+    setShowSuggestions(false);
+    onCitySelected(suggestion);
+  };
+
   return (
     <div id="city-search">
       <input
         type="text"
         className="city"
-                placeholder="Search for a city"
+        placeholder="Search for a city"
         value={query}
         onFocus={() => setShowSuggestions(true)}
         onChange={handleInputChanged}
@@ -28,9 +34,19 @@ const CitySearch = ({ allLocations }) => {
       {showSuggestions ?
         <ul className="suggestions">
           {suggestions.map((suggestion) => {
-            return <li key={suggestion}>{suggestion}</li>
+            return (
+              <li 
+                key={suggestion}
+                onClick={() => handleItemClicked(suggestion)}
+              >
+                {suggestion}
+              </li>
+            );
           })}
-          <li key='See all cities'>
+          <li 
+            key='See all cities'
+            onClick={() => handleItemClicked("See all cities")}
+          >
             <b>See all cities</b>
           </li>
         </ul>
