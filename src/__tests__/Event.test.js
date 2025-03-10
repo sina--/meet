@@ -12,14 +12,27 @@ describe('<Event /> component', () => {
     EventComponent = render(<Event event={allEvents[0]} />);
   });
 
-  test('renders event title', () => {
+  // Basic event information tests
+  test('renders event title (summary) correctly', () => {
     expect(EventComponent.queryByText(allEvents[0].summary)).toBeInTheDocument();
   });
 
-  test('renders event location', () => {
+  test('renders event start time correctly', () => {
+    const startTimeElement = EventComponent.container.querySelector('.event-start-time');
+    expect(startTimeElement).toBeInTheDocument();
+    expect(startTimeElement.textContent).toContain(allEvents[0].start.dateTime);
+    expect(startTimeElement.textContent).toContain(allEvents[0].start.timeZone);
+  });
+
+  test('renders event location correctly', () => {
     expect(EventComponent.queryByText(allEvents[0].location)).toBeInTheDocument();
   });
 
+  test('renders event created date correctly', () => {
+    expect(EventComponent.container.textContent).toContain(allEvents[0].created);
+  });
+
+  // UI element presence tests
   test('renders event details button with "Show Details" as default', () => {
     const button = EventComponent.queryByText('Show Details');
     expect(button).toBeInTheDocument();
@@ -30,6 +43,7 @@ describe('<Event /> component', () => {
     expect(details).not.toBeInTheDocument();
   });
 
+  // Expanded details tests
   test('shows details section when user clicks "Show Details" button', async () => {
     const user = userEvent.setup();
     const button = EventComponent.queryByText('Show Details');
@@ -38,10 +52,14 @@ describe('<Event /> component', () => {
     const details = EventComponent.container.querySelector('.details');
     expect(details).toBeInTheDocument();
     
-    // Check for specific elements rather than exact text content
+    // Verify all expanded details are present
     expect(details.querySelector('.description')).toBeInTheDocument();
-    expect(details.querySelector('.start-time')).toBeInTheDocument();
-    expect(details.querySelector('.end-time')).toBeInTheDocument();
+    expect(details.querySelector('.description').textContent).toBe(allEvents[0].description);
+    
+    const endTimeElement = details.querySelector('.end-time');
+    expect(endTimeElement).toBeInTheDocument();
+    expect(endTimeElement.textContent).toContain(allEvents[0].end.dateTime);
+    expect(endTimeElement.textContent).toContain(allEvents[0].end.timeZone);
     
     expect(button.textContent).toBe('Hide Details');
   });
