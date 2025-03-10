@@ -4,9 +4,17 @@ const NumberOfEvents = ({ onNumberOfEventsChanged }) => {
   const [numberOfEvents, setNumberOfEvents] = useState(32);
 
   const handleInputChanged = (event) => {
-    const value = parseInt(event.target.value) || 32;
-    setNumberOfEvents(value);
-    onNumberOfEventsChanged(value);
+    const value = event.target.value;
+    // Allow empty input for further typing
+    if (value === '') {
+      setNumberOfEvents('');
+      return;
+    }
+    const newValue = parseInt(value) || 32;
+    setNumberOfEvents(newValue);
+    if (onNumberOfEventsChanged) {
+      onNumberOfEventsChanged(newValue);
+    }
   };
 
   return (

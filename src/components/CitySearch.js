@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const CitySearch = ({ allLocations, onCitySelected }) => {
+const CitySearch = ({ allLocations = [], onCitySelected }) => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+
+  useEffect(() => {
+    setSuggestions(allLocations);
+  }, [`${allLocations}`]);
 
   const handleInputChanged = (event) => {
     const value = event.target.value;
@@ -18,7 +22,9 @@ const CitySearch = ({ allLocations, onCitySelected }) => {
   const handleItemClicked = (suggestion) => {
     setQuery(suggestion);
     setShowSuggestions(false);
-    onCitySelected(suggestion);
+    if (onCitySelected) {
+      onCitySelected(suggestion);
+    }
   };
 
   return (
