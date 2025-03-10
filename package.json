@@ -19,7 +19,8 @@
     "coverage": "react-scripts test --env=jsdom --watchAll=false --coverage",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "vercel-build": "PUBLIC_URL=/ react-scripts build"
   },
   "eslintConfig": {
     "extends": [
