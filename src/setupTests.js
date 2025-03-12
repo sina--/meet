@@ -16,3 +16,6 @@ console.error = (...args) => {
   const ignoreMessage = MESSAGES_TO_IGNORE.find(message => args.toString().includes(message));
   if (!ignoreMessage) originalError(...args);
 }
+
+// Set a longer timeout for all Jest tests, especially needed for Puppeteer tests
+jest.setTimeout(30000); // 30 seconds
