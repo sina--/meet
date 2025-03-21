@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const NumberOfEvents = ({ onNumberOfEventsChanged }) => {
+const NumberOfEvents = ({ onNumberOfEventsChanged, setErrorAlert }) => {
   const [numberOfEvents, setNumberOfEvents] = useState(32);
 
   const handleInputChanged = (event) => {
@@ -8,13 +8,21 @@ const NumberOfEvents = ({ onNumberOfEventsChanged }) => {
     // Allow empty input for further typing
     if (value === '') {
       setNumberOfEvents('');
+      setErrorAlert('');
       return;
     }
-    const newValue = parseInt(value) || 32;
-    setNumberOfEvents(newValue);
-    if (onNumberOfEventsChanged) {
-      onNumberOfEventsChanged(newValue);
+
+    let valueInt = parseInt(value);
+    
+    if (isNaN(valueInt) || valueInt <= 0) {
+      setErrorAlert('Number of events must be a positive number');
+      setNumberOfEvents(value);
+      return;
     }
+
+    setErrorAlert('');
+    setNumberOfEvents(valueInt);
+    onNumberOfEventsChanged(valueInt);
   };
 
   return (
