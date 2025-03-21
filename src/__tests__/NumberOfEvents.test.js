@@ -14,20 +14,27 @@ describe('<NumberOfEvents /> component', () => {
   });
 
   test('renders number of events input', () => {
-    const numberInput = NumberOfEventsComponent.queryByRole('spinbutton');
+    const numberInput = NumberOfEventsComponent.queryByRole('textbox');
     expect(numberInput).toBeInTheDocument();
   });
 
   test('default number of events is 32', () => {
-    const numberInput = NumberOfEventsComponent.queryByRole('spinbutton');
-    expect(numberInput).toHaveValue(32);
+    const numberInput = NumberOfEventsComponent.queryByRole('textbox');
+    expect(numberInput).toHaveValue('32');
   });
 
   test('updates number of events when user types', async () => {
     const user = userEvent.setup();
-    const numberInput = NumberOfEventsComponent.queryByRole('spinbutton');
+    const numberInput = NumberOfEventsComponent.queryByRole('textbox');
     await user.type(numberInput, "{backspace}{backspace}10");
-    expect(numberInput).toHaveValue(10);
+    expect(numberInput).toHaveValue('10');
+  });
+
+  test('allows empty input', async () => {
+    const user = userEvent.setup();
+    const numberInput = NumberOfEventsComponent.queryByRole('textbox');
+    await user.clear(numberInput);
+    expect(numberInput).toHaveValue('');
   });
 
   test('calls onNumberOfEventsChanged callback when number changes', async () => {
@@ -41,7 +48,7 @@ describe('<NumberOfEvents /> component', () => {
       />
     );
     
-    const numberInput = NumberOfEventsComponent.queryByRole('spinbutton');
+    const numberInput = NumberOfEventsComponent.queryByRole('textbox');
     await user.type(numberInput, "{backspace}{backspace}10");
     
     expect(onNumberOfEventsChanged).toHaveBeenCalledWith(10);
@@ -58,7 +65,7 @@ describe('<NumberOfEvents /> component', () => {
       />
     );
     
-    const numberInput = NumberOfEventsComponent.queryByRole('spinbutton');
+    const numberInput = NumberOfEventsComponent.queryByRole('textbox');
     await user.type(numberInput, "{backspace}{backspace}-1");
     
     expect(setErrorAlert).toHaveBeenCalledWith('Number of events must be a positive number');
@@ -74,7 +81,7 @@ describe('<NumberOfEvents /> component', () => {
       />
     );
     
-    const numberInput = NumberOfEventsComponent.queryByRole('spinbutton');
+    const numberInput = NumberOfEventsComponent.queryByRole('textbox');
     await user.type(numberInput, "{backspace}{backspace}0");
     
     expect(setErrorAlert).toHaveBeenCalledWith('Number of events must be a positive number');
@@ -90,9 +97,25 @@ describe('<NumberOfEvents /> component', () => {
       />
     );
     
-    const numberInput = NumberOfEventsComponent.queryByRole('spinbutton');
+    const numberInput = NumberOfEventsComponent.queryByRole('textbox');
     await user.type(numberInput, "{backspace}{backspace}5");
     
     expect(setErrorAlert).toHaveBeenCalledWith('');
+  });
+
+  test('shows error for text input', async () => {
+    const user = userEvent.setup();
+    const setErrorAlert = jest.fn();
+    NumberOfEventsComponent.rerender(
+      <NumberOfEvents 
+        onNumberOfEventsChanged={() => {}}
+        setErrorAlert={setErrorAlert}
+      />
+    );
+    
+    const numberInput = NumberOfEventsComponent.queryByRole('textbox');
+    await user.type(numberInput, "{backspace}{backspace}abc");
+    
+    expect(setErrorAlert).toHaveBeenCalledWith('Number of events must be a positive number');
   });
 }); 
