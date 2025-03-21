@@ -1,36 +1,41 @@
 import { useState } from 'react';
 
 const NumberOfEvents = ({ onNumberOfEventsChanged, setErrorAlert }) => {
-  const [numberOfEvents, setNumberOfEvents] = useState(32);
+  const [numberOfEvents, setNumberOfEvents] = useState("32");
 
   const handleInputChanged = (event) => {
     const value = event.target.value;
+    setNumberOfEvents(value);
     
-    if (value === '') {
-      setNumberOfEvents('');
-      setErrorAlert('');
+    // Clear error for empty input
+    if (value === "") {
+      setErrorAlert("");
       return;
     }
 
-    const numberValue = Number(value);
-    if (isNaN(numberValue) || numberValue <= 0) {
-      setErrorAlert('Number of events must be a positive number');
-      setNumberOfEvents(value);
+    // Only process numeric inputs
+    if (/^[0-9]*$/.test(value)) {
+      if (parseInt(value) <= 0) {
+        setErrorAlert('Number of events must be a positive number');
+      } else {
+        setErrorAlert("");
+        onNumberOfEventsChanged(parseInt(value));
+      }
     } else {
-      setErrorAlert('');
-      setNumberOfEvents(numberValue);
-      onNumberOfEventsChanged(numberValue);
+      // For non-numeric input
+      setErrorAlert('Number of events must be a positive number');
     }
   };
 
   return (
     <div id="number-of-events">
+      <label htmlFor="number-of-events-input">Number of Events: </label>
       <input
-        type="text"
+        type="text" 
+        id="number-of-events-input"
         value={numberOfEvents}
         onChange={handleInputChanged}
-        placeholder="Enter number of events"
-        className="number-of-events-input"
+        role="spinbutton"
       />
     </div>
   );

@@ -58,12 +58,13 @@ defineFeature(feature, test => {
     });
 
     when('the user adjusts the number of events using a dropdown or slider', async () => {
-      // Find the input field - it's a number input which has role 'spinbutton'
+      // Find the input field - now it's a text input which has role 'spinbutton'
       const numberOfEventsInput = within(NumberOfEventsDOM).queryByRole('spinbutton');
       expect(numberOfEventsInput).toBeDefined();
       
-      // Use the same typing pattern as in the App integration tests
-      await user.type(numberOfEventsInput, "{backspace}{backspace}10");
+      // Clear and type new value
+      await user.clear(numberOfEventsInput);
+      await user.type(numberOfEventsInput, "10");
     });
 
     then('the app should update to display the specified number of events.', async () => {
