@@ -23,7 +23,7 @@ const isLocalhost = Boolean(
         window.addEventListener('load', () => {
           // Use dynamic path for service worker based on deployment environment
           const basePath = window.location.pathname.includes('/meet/') ? '/meet' : '';
-          const swUrl = `${basePath}/service-worker.js`;
+          const swUrl = `${basePath}/sw.js`;
           console.log("Registering service worker at:", swUrl);
     
           if (isLocalhost) {

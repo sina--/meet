@@ -44,12 +44,20 @@
       "dest": "/manifest.webmanifest"
     },
     {
-      "src": "/meet/service-worker.js",
+      "src": "/meet/sw.js",
       "headers": {
         "Cache-Control": "no-cache",
-        "Service-Worker-Allowed": "/"
+        "Service-Worker-Allowed": "/meet/"
       },
-      "dest": "/service-worker.js"
+      "dest": "/sw.js"
+    },
+    {
+      "src": "/meet/workbox-57555046.js",
+      "dest": "/workbox-57555046.js"
+    },
+    {
+      "src": "/meet/registerSW.js",
+      "dest": "/registerSW.js"
     },
     {
       "src": "/meet/(.*)",
