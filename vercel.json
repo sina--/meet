@@ -20,6 +20,18 @@
       "dest": "/favicon.ico"
     },
     {
+      "src": "/meet-app-144.png",
+      "dest": "/meet-app-144.png"
+    },
+    {
+      "src": "/meet-app-192.png",
+      "dest": "/meet-app-192.png"
+    },
+    {
+      "src": "/meet-app-512.png",
+      "dest": "/meet-app-512.png"
+    },
+    {
       "src": "/manifest.json",
       "dest": "/manifest.json"
     },

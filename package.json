@@ -19,12 +19,12 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && cp -f src/service-worker.js dist/",
     "serve": "vite preview",
     "test": "react-scripts test",
     "coverage": "react-scripts test --env=jsdom --watchAll=false --coverage",
     "eject": "react-scripts eject",
-    "vercel-build": "vite build"
+    "vercel-build": "vite build && cp -f src/service-worker.js dist/"
   },
   "eslintConfig": {
     "extends": [

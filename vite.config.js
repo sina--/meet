@@ -2,15 +2,17 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import { VitePWA } from 'vite-plugin-pwa';
 
-
 export default defineConfig({
  base: '/',
  plugins: [
    react(),
    VitePWA({
+     strategies: 'generateSW',
+     registerType: 'autoUpdate',
+     filename: 'service-worker.js',
      manifest: {
-       "short_name": "React App",
-       "name": "Create React App Sample",
+       "short_name": "Meet App",
+       "name": "Meet App - Find Events Near You",
        "icons": [
            {
            "src": "favicon.ico",
@@ -42,13 +44,13 @@ export default defineConfig({
        "theme_color": "#000000",
        "background_color": "#ffffff"
      },
-     srcDir: 'src', // Update if your service-worker.js is elsewhere
-     filename: 'service-worker.js', // Ensure it's accessible in production
-     registerType: 'autoUpdate',
+     includeAssets: ['favicon.ico', 'meet-app-*.png', 'manifest.json'],
      workbox: {
+       clientsClaim: true,
+       skipWaiting: true,
        runtimeCaching: [
          {
-           urlPattern: /\/.*\.png$/, // Example pattern for caching png images
+           urlPattern: /\/.*\.png$/,
            handler: 'StaleWhileRevalidate',
            options: {
              cacheName: 'images',
