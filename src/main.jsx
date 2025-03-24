@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import * as atatus from 'atatus-spa';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
-atatus.config('ad3c2cdec29b481f930ed452ec0fe93a').install();
+// atatus.config('ad3c2cdec29b481f930ed452ec0fe93a').install();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,4 +23,4 @@ serviceWorkerRegistration.register();
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// reportWebVitals();
