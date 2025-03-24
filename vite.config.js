@@ -12,36 +12,39 @@ export default defineConfig({
         name: "Meet App - Find Events Near You",
         icons: [
           {
-            src: "/favicon.ico",
+            src: "./icons/favicon.ico",
             sizes: "48x48",
-            type: "image/x-icon"
+            type: "image/x-icon",
+            purpose: "maskable"
           },
           {
-            src: "/meet-app-144.png",
+            src: "./icons/meet-app-144.png",
             type: "image/png",
             sizes: "144x144",
-            purpose: "any maskable"
+            purpose: "any"
           },
           {
-            src: "/meet-app-192.png",
+            src: "./icons/meet-app-192.png",
             type: "image/png",
             sizes: "192x192",
-            purpose: "any maskable"
+            purpose: "maskable"
           },
           {
-            src: "/meet-app-512.png",
+            src: "./icons/meet-app-512.png",
             type: "image/png",
             sizes: "512x512",
-            purpose: "any maskable"
+            purpose: "maskable"
           }
         ],
         id: "/",
-        start_url: "/",
+        start_url: ".",
         scope: "/",
         display: "standalone",
         theme_color: "#000000",
         background_color: "#ffffff"
       },
+      srcDir: "src",
+      filename: "service-worker.js",
       registerType: 'autoUpdate',
       devOptions: {
         enabled: true
@@ -61,13 +64,12 @@ export default defineConfig({
             }
           },
           {
-            urlPattern: /\.(?:png|jpg|jpeg|svg|gif|ico)$/i,
-            handler: 'CacheFirst',
+            urlPattern: /\/.*\.png$/,
+            handler: "StaleWhileRevalidate",
             options: {
-              cacheName: 'images',
+              cacheName: "images",
               expiration: {
-                maxEntries: 50,
-                maxAgeSeconds: 30 * 24 * 60 * 60 // 30 days
+                maxEntries: 50
               }
             }
           }
