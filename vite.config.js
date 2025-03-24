@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'prompt',
+      registerType: 'autoUpdate',
       includeAssets: ['icons/*.{ico,png}'],
       manifest: {
         short_name: "Meet App",
@@ -38,12 +38,16 @@ export default defineConfig({
             purpose: "maskable"
           }
         ],
+        categories: ["events", "entertainment", "social"],
+        display_override: ["standalone", "window-controls-overlay"],
         id: "/",
         start_url: "/",
         scope: "/",
         display: "standalone",
         theme_color: "#000000",
         background_color: "#ffffff",
+        orientation: "any",
+        prefer_related_applications: false
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
@@ -76,6 +80,6 @@ export default defineConfig({
         enabled: true,
         type: 'module'
       }
-    }),
-  ],
+    })
+  ]
 });
