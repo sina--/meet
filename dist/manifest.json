@@ -3,33 +3,33 @@
   "name": "Meet App - Find Events Near You",
   "icons": [
     {
-      "src": "icons/favicon.ico",
+      "src": "/meet/icons/favicon.ico",
       "sizes": "48x48",
       "type": "image/x-icon",
       "purpose": "maskable"
     },
     {
-      "src": "icons/meet-app-144.png",
+      "src": "/meet/icons/meet-app-144.png",
       "type": "image/png",
       "sizes": "144x144",
       "purpose": "any"
     },
     {
-      "src": "icons/meet-app-192.png",
+      "src": "/meet/icons/meet-app-192.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "maskable"
     },
     {
-      "src": "icons/meet-app-512.png",
+      "src": "/meet/icons/meet-app-512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "maskable"
     }
   ],
-  "id": "./",
-  "start_url": "./",
-  "scope": "./",
+  "id": "/meet/",
+  "start_url": "/meet/",
+  "scope": "/meet/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"

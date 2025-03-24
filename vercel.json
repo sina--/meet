@@ -12,35 +12,39 @@
   ],
   "routes": [
     {
-      "src": "/assets/(.*)",
+      "src": "/meet/assets/(.*)",
       "dest": "/assets/$1"
     },
     {
-      "src": "/favicon.ico",
+      "src": "/meet/icons/(.*)",
+      "dest": "/icons/$1"
+    },
+    {
+      "src": "/meet/favicon.ico",
       "dest": "/favicon.ico"
     },
     {
-      "src": "/meet-app-144.png",
-      "dest": "/meet-app-144.png"
+      "src": "/meet/icons/meet-app-144.png",
+      "dest": "/icons/meet-app-144.png"
     },
     {
-      "src": "/meet-app-192.png",
-      "dest": "/meet-app-192.png"
+      "src": "/meet/icons/meet-app-192.png",
+      "dest": "/icons/meet-app-192.png"
     },
     {
-      "src": "/meet-app-512.png",
-      "dest": "/meet-app-512.png"
+      "src": "/meet/icons/meet-app-512.png",
+      "dest": "/icons/meet-app-512.png"
     },
     {
-      "src": "/manifest.json",
+      "src": "/meet/manifest.json",
       "dest": "/manifest.json"
     },
     {
-      "src": "/manifest.webmanifest",
+      "src": "/meet/manifest.webmanifest",
       "dest": "/manifest.webmanifest"
     },
     {
-      "src": "/service-worker.js",
+      "src": "/meet/service-worker.js",
       "headers": {
         "Cache-Control": "no-cache",
         "Service-Worker-Allowed": "/"
@@ -48,7 +52,7 @@
       "dest": "/service-worker.js"
     },
     {
-      "src": "/(.*)",
+      "src": "/meet/(.*)",
       "dest": "/index.html"
     }
   ]
