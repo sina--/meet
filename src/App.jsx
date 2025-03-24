@@ -25,15 +25,19 @@ const App = () => {
   }, [currentCity, currentNumberOfEvents]);
 
   const fetchData = async () => {
-    const allEvents = await getEvents();
-    const filteredEvents = currentCity === "See all cities" ?
-      allEvents :
-      allEvents.filter(event => event.location === currentCity);
-    setEvents(filteredEvents.slice(0, currentNumberOfEvents));
-    
-    // Only set allLocations if it's empty
-    if (allLocations.length === 0) {
-      setAllLocations(extractLocations(allEvents));
+    try {
+      const allEvents = await getEvents();
+      const filteredEvents = currentCity === "See all cities" ?
+        allEvents :
+        allEvents.filter(event => event.location === currentCity);
+      setEvents(filteredEvents.slice(0, currentNumberOfEvents));
+      
+      // Only set allLocations if it's empty
+      if (allLocations.length === 0) {
+        setAllLocations(extractLocations(allEvents));
+      }
+    } catch (error) {
+      console.error('Error fetching events:', error);
     }
   };
 
@@ -52,6 +56,7 @@ const App = () => {
         {errorAlert.length ? <ErrorAlert text={errorAlert}/> : null}
         {warningAlert.length ? <WarningAlert text={warningAlert}/> : null}
       </div>
+      <h1>Meet App</h1>
       <CitySearch 
         allLocations={allLocations} 
         onCitySelected={handleCitySelected}
