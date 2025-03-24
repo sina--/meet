@@ -12,52 +12,67 @@ export default defineConfig({
         name: "Meet App - Find Events Near You",
         icons: [
           {
-            src: "favicon.ico",
+            src: "/favicon.ico",
             sizes: "48x48",
-            type: "image/x-icon",
-            purpose: "maskable"
+            type: "image/x-icon"
           },
           {
-            src: "meet-app-144.png",
+            src: "/meet-app-144.png",
             type: "image/png",
             sizes: "144x144",
-            purpose: "any"
+            purpose: "any maskable"
           },
           {
-            src: "meet-app-192.png",
+            src: "/meet-app-192.png",
             type: "image/png",
             sizes: "192x192",
-            purpose: "maskable"
+            purpose: "any maskable"
           },
           {
-            src: "meet-app-512.png",
+            src: "/meet-app-512.png",
             type: "image/png",
             sizes: "512x512",
-            purpose: "maskable"
+            purpose: "any maskable"
           }
         ],
-        start_url: ".",
+        id: "/",
+        start_url: "/",
+        scope: "/",
         display: "standalone",
         theme_color: "#000000",
         background_color: "#ffffff"
       },
-      srcDir: 'src',
-      filename: 'service-worker.js',
       registerType: 'autoUpdate',
+      devOptions: {
+        enabled: true
+      },
       workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
         runtimeCaching: [
           {
-            urlPattern: /\/.*\.png$/,
-            handler: 'StaleWhileRevalidate',
+            urlPattern: /^https:\/\/www\.googleapis\.com\/.*/i,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'google-apis',
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 60 * 60 * 24 // 24 hours
+              }
+            }
+          },
+          {
+            urlPattern: /\.(?:png|jpg|jpeg|svg|gif|ico)$/i,
+            handler: 'CacheFirst',
             options: {
               cacheName: 'images',
               expiration: {
                 maxEntries: 50,
-              },
-            },
-          },
-        ],
-      },
-    }),
-  ],
+                maxAgeSeconds: 30 * 24 * 60 * 60 // 30 days
+              }
+            }
+          }
+        ]
+      }
+    })
+  ]
 })
