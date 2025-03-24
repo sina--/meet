@@ -12,6 +12,10 @@
   ],
   "routes": [
     {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    },
+    {
       "src": "/meet/assets/(.*)",
       "dest": "/assets/$1"
     },
@@ -58,10 +62,6 @@
     {
       "src": "/meet/registerSW.js",
       "dest": "/registerSW.js"
-    },
-    {
-      "src": "/meet/(.*)",
-      "dest": "/index.html"
     }
   ]
 } 

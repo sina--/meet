@@ -21,9 +21,8 @@ const isLocalhost = Boolean(
   export function register(config) {
     if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          // Use dynamic path for service worker based on deployment environment
-          const basePath = window.location.pathname.includes('/meet/') ? '/meet' : '';
-          const swUrl = `${basePath}/sw.js`;
+          // Use the service worker from the root path
+          const swUrl = '/sw.js';
           console.log("Registering service worker at:", swUrl);
     
           if (isLocalhost) {
