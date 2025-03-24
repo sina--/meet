@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Meet App",
+  "name": "Meet App - Find Events Near You",
   "icons": [
     {
       "src": "favicon.ico",
