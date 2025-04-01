@@ -19,7 +19,10 @@ const CityEventsChart = ({ allLocations, events }) => {
     const data = allLocations.map((location) => {
       const count = events.filter((event) =>
         event.location === location).length
-      const city = location.split((/, | ‐ /))[0]
+      let city = location.split((/, | ‐ /))[0]
+      if (city.length > 10) {
+        city = city.substring(0, 10) + '...';
+      }
       return { city, count };
     })
     return data;
