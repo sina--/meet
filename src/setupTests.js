@@ -19,3 +19,19 @@ console.error = (...args) => {
 
 // Set a longer timeout for all Jest tests, especially needed for Puppeteer tests
 jest.setTimeout(30000); // 30 seconds
+
+const { ResizeObserver } = window;
+beforeEach(() => {
+  //@ts-ignore
+  delete window.ResizeObserver;
+  window.ResizeObserver = jest.fn().mockImplementation(() => ({
+    observe: jest.fn(),
+    unobserve: jest.fn(),
+    disconnect: jest.fn(),
+  }));
+});
+
+afterEach(() => {
+  window.ResizeObserver = ResizeObserver;
+  jest.restoreAllMocks();
+});
