@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const NumberOfEvents = ({ onNumberOfEventsChanged, setErrorAlert }) => {
   const [numberOfEvents, setNumberOfEvents] = useState("32");

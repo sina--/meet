@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import CitySearch from './components/CitySearch.jsx';
 import EventList from './components/EventList.jsx';
 import NumberOfEvents from './components/NumberOfEvents.jsx';
