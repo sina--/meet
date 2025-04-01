@@ -67,7 +67,9 @@ const App = () => {
         onNumberOfEventsChanged={handleNumberOfEventsChanged}
         setErrorAlert={setErrorAlert}
       />
-      <CityEventsChart allLocations={allLocations} events={events} />
+      <div className="charts-container">
+        <CityEventsChart allLocations={allLocations} events={events} />
+      </div>
       <EventList events={events} />
     </div>
   );
