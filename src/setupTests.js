@@ -20,6 +20,7 @@ console.error = (...args) => {
 // Set a longer timeout for all Jest tests, especially needed for Puppeteer tests
 jest.setTimeout(30000); // 30 seconds
 
+// comment out when running e2e tests
 const { ResizeObserver } = window;
 beforeEach(() => {
   //@ts-ignore
